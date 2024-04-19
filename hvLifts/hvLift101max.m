@@ -1,0 +1,47 @@
+function A101 = hvLift101max(A111, A001, A100, cmin)
+%-----------------------------------------------------------------------------
+%
+% For each point of colour 101 this function assigns the maximum value at the
+% neighbouring gridpoints of colours 111, 011, 100.
+%
+% Original design and implementation in 2D by:
+% Dr. Paul M. de Zeeuw 
+% (c) 2002 Stichting CWI, Amsterdam
+%
+% Design and implementation in 3D
+% (c) 2024 Dr. Tessa Nogatz, tessa.nogatz@gmail.com
+%
+%-----------------------------------------------------------------------------
+[m111, n111, l111] = size(A111);
+[m001, n001, l001] = size(A001);
+[m100, n100, l100] = size(A100);
+
+n101 = n001;
+m101 = m111;
+l101 = l111;
+ 
+if n101 == n111
+  S = max(stripR3D(extL3D(A111,cmin)), A111);
+elseif n101 == n111+1 
+  S = max(extL3D(A111, cmin), extR3D(A111, cmin));
+else
+  error(' hvLift101max - sizes do not match ');
+end 
+
+if m101 == m001
+    T = max(A001, stripU3D(extD3D(A001, cmin)));
+elseif m101 == m001-1 
+    T = max(stripD3D(A001), stripU3D(A001));
+else
+  error(' hvLift101max - sizes do not match ');
+end 
+
+if l101 == l100
+    R = max(A100, stripF3D(extB3D(A100, cmin)));
+elseif l101 == l100-1 
+    R = max(stripB3D(A100), stripF3D(A100));
+else
+    error(' hvLift101max - sizes do not match ');
+end
+A101=max(S, max(R ,T));
+%-----------------------------------------------------------------------------
