@@ -35,7 +35,7 @@ else
 end
 
 if     l000 == l001
-  R=max(A001, stripF3D(extB3D(A001, cmin)));
+  R=max(A001, stripB3D(extF3D(A001, cmin)));
 elseif l000 == l001+1 
   R=max(extB3D(A001, cmin), extF3D(A001, cmin));
 else
