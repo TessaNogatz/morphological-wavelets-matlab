@@ -22,10 +22,10 @@ function [C, S] = QLiftDec3MaxMinMax(X, N)
 %Firstly, check input data
 %
 if  isempty(X)
-  error(' QLiftDec2MaxMin - empty matrix ');
+  error(' QLiftDec2MaxMinMax - empty matrix ');
 else
-  if mod(N, 2) == 1
-    error(' QLiftDec2MaxMin - only an even number of levels is accepted ');
+  if mod(N, 3) == 1
+    error(' QLiftDec2MaxMinMax - only multiples of 3 as levels are accepted ');
   end
   %if QLmaxlev(size(X), 'maxmin') < N 
     %error(' QLiftDec2MaxMin - too many levels requested ');
